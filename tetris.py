@@ -31,7 +31,10 @@ def main():
         pg.draw.rect(root, GREEN, (x, y, a, b))
         pg.display.update()
     
-        x += 2
+        if x >= WIN_WEIGHT + a:
+            x = 0 - a
+        else:
+            x += 2
         
         pg.time.delay(50)
 main()

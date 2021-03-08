@@ -5,20 +5,20 @@ import sys
 FPS = 60
 WHITE = (255, 255, 255)
 GREEN = (0, 200, 64)
-WIN_WEIGHT = 400
-WIN_HEIGHT = 400
+WEIGHT = 600
+HEIGHT = 600
 
 
 
 def main():
     global root, x, y, a, b
-    a = 30
-    b = 30
-    x = 0 
-    y = WIN_HEIGHT // 2
+    a = 50
+    b = 50
+    x = WEIGHT // 2 
+    y = HEIGHT // 2
     pg.init()
-    root = pg.display.set_mode((WIN_WEIGHT, WIN_HEIGHT))
-    pg.display.set_caption('Cryptowrath')
+    root = pg.display.set_mode((WEIGHT, HEIGHT))
+    pg.display.set_caption('Tetris')
     pg.display.update()
     while 1:
             
@@ -26,15 +26,24 @@ def main():
             if i.type == QUIT:
                 pg.quit()
                 sys.exit()
+            elif i.type == KEYDOWN:
+                if i.key ==  K_LEFT:
+                    x -= 20
+                elif i.key == K_RIGHT:
+                    x += 20
+                elif i.key == K_UP:
+                    y -= 20
+                elif i.key == K_DOWN:
+                    y += 20
         pg.display.update()
         root.fill(WHITE)
         pg.draw.rect(root, GREEN, (x, y, a, b))
+        if y >= HEIGHT + b:
+            y -= 20
+        elif x >= WEIGHT + a:
+            x = 0 - a
         pg.display.update()
     
-        if x >= WIN_WEIGHT + a:
-            x = 0 - a
-        else:
-            x += 2
         
         pg.time.delay(50)
 main()

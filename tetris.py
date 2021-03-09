@@ -1,29 +1,22 @@
 import pygame as pg
 from pygame.locals import *
 import sys
+from random import *
 
 FPS = 60
 WHITE = (255, 255, 255)
 GREEN = (0, 200, 64)
 BLUE = (0, 0, 255)
-WEIGHT = 600
-HEIGHT = 600
-RIGHT = "move to the right"
-LEFT = "move to the left"
-UP = "move up"
-DOWN = "move down"
-STOP = "stop"
-ARROWS = [K_LEFT, K_RIGHT, K_UP, K_DOWN]
+WEIGHT = 400
+HEIGHT = 800
 
-
-
+    
 def main():
     global root, x, y, a, b
-    a = 50
+    a = 100
     b = 50
     x = WEIGHT // 2 
-    y = HEIGHT // 2
-    motion = STOP
+    y = 0 - b
     pg.init()
     root = pg.display.set_mode((WEIGHT, HEIGHT))
     pg.display.set_caption('Tetris')
@@ -47,6 +40,14 @@ def main():
             y -= 20
         elif keys[K_DOWN]:
             y += 20
+        else:
+            y += 20
+        if keys[K_DOWN] and keys[K_LEFT]:
+            x -= 20
+            y += 20
+        if keys[K_DOWN] and keys[K_RIGHT]:
+            y += 20
+            x += 20
         if y >= HEIGHT + b:
             y = 0 - b
         elif x >= WEIGHT + a:
